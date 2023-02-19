@@ -17,6 +17,14 @@ OUTPUT
 
 ![967d4024-1c5e-492d-837c-73448453121f](https://user-images.githubusercontent.com/118569726/218302191-991d0a4a-f067-4d09-9d44-04b5a0f195e7.jpg)
 
+#Slide to Right
+
+![Screenshot_1676780567](https://user-images.githubusercontent.com/118569726/219922682-61fe9eb9-5384-463d-b590-5b91bd500c13.png)
+
+#Slide to Left
+
+![Screenshot_1676780578](https://user-images.githubusercontent.com/118569726/219922691-81b05ffa-d219-4d7b-a4c0-c9b30ddf9f58.png)
+
 #Mark as Done
 
 ![d2d5bb99-45bc-465c-9bc7-1b5460dc1f5d](https://user-images.githubusercontent.com/118569726/218302209-bd47fe43-a8fc-44f3-bfe8-84b6026d4a29.jpg)
