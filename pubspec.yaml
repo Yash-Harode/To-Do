@@ -31,8 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.11.0
   intl: ^0.18.0
+  flutter_slidable: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,6 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.11.0
   hive: "2.2.3"
   hive_flutter: "1.1.0"
 
@@ -52,9 +53,9 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
-  image_path: "assets/hero.png"
+  image_path: "assets/icon/hero.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   # web:
   #   generate: true

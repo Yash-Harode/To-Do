@@ -1,10 +1,9 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 // ignore: depend_on_referenced_packages
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-
 import '../model/task.dart';
 
 class HomePage extends StatefulWidget {
@@ -90,43 +89,78 @@ class _HomePageState extends State<HomePage> {
         var task = Task.fromMap(tasks[_index]);
         DateTime date = task.timestamp;
 
-        return ListTile(
-          contentPadding: EdgeInsets.fromLTRB(25, 17, 25, 17),
-          tileColor: Color.fromRGBO(116, 123, 254, 0.533),
-          title: Text(
-            task.content,
-            style: TextStyle(
-              decoration: task.done ? TextDecoration.lineThrough : null,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+        return Slidable(
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) => {
+                      //delete
+                      _box!.deleteAt(_index),
+                      setState(() {}),
+                    }),
+                backgroundColor: const Color.fromARGB(255, 252, 53, 39),
+                foregroundColor: Colors.black,
+                icon: Icons.delete_forever,
+              ),
+            ],
+          ),
+          startActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) => {
+                      //add
+                      task.done = !task.done,
+                      _box!.putAt(
+                        _index,
+                        task.toMap(),
+                      ),
+                      setState(() {}),
+                    }),
+                backgroundColor: const Color.fromARGB(255, 111, 249, 69),
+                icon: Icons.add_task_sharp,
+              ),
+            ],
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(25, 17, 25, 17),
+            tileColor: const Color.fromRGBO(116, 123, 254, 0.533),
+            title: Text(
+              task.content,
+              style: TextStyle(
+                decoration: task.done ? TextDecoration.lineThrough : null,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          subtitle: Text(
-            DateFormat(
-              'hh:mm a || '
-              'dd-mm-yyyy',
-            ).format(date),
-          ),
+            subtitle: Text(
+              DateFormat(
+                'hh:mm a || '
+                'dd-mm-yyyy',
+              ).format(date),
+            ),
 
-          //datetime prop give the actual time
-          trailing: Icon(
-            task.done
-                ? Icons.check_box_outlined
-                : Icons.check_box_outline_blank_outlined,
-            color: const Color.fromRGBO(15, 27, 252, 0.733),
+            //datetime prop give the actual time
+            trailing: Icon(
+              task.done
+                  ? Icons.check_box_outlined
+                  : Icons.check_box_outline_blank_outlined,
+              color: const Color.fromRGBO(15, 27, 252, 0.733),
+            ),
+            onTap: () {
+              task.done = !task.done;
+              _box!.putAt(
+                _index,
+                task.toMap(),
+              );
+              setState(() {});
+            },
+            onLongPress: () {
+              _box!.deleteAt(_index);
+              setState(() {});
+            },
           ),
-          onTap: () {
-            task.done = !task.done;
-            _box!.putAt(
-              _index,
-              task.toMap(),
-            );
-            setState(() {});
-          },
-          onLongPress: () {
-            _box!.deleteAt(_index);
-            setState(() {});
-          },
         );
       },
       separatorBuilder: (BuildContext context, int index) {
